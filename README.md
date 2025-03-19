@@ -3,6 +3,12 @@
 This is a template for creating an end-to-end [SP1](https://github.com/succinctlabs/sp1) project
 that can generate a proof of any RISC-V program.
 
+## gitSubmodules の追加方法
+
+```bash
+git submodule update --init --recursive
+```
+
 ## Requirements
 
 - [Rust](https://rustup.rs/)
@@ -33,6 +39,19 @@ cargo run --release -- --execute
 
 This will execute the program and display the output.
 
+```bash
+warning: fibonacci-script@0.1.0: rustc +succinct --version: "rustc 1.85.0-dev\n"
+warning: fibonacci-script@0.1.0: fibonacci-program built at 2025-03-20 00:12:21
+   Compiling git2 v0.19.0
+   Compiling sp1-sdk v4.0.0
+    Finished `release` profile [optimized] target(s) in 1m 48s
+     Running `/Users/harukikondo/git/sp1-project-template/target/release/fibonacci --execute`
+thread 'main' panicked at /Users/harukikondo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sp1-sdk-4.0.0/src/env/mod.rs:67:18:
+Invalid SP1_PROVER value. Expected one of: mock, cpu, cuda, or network. Got: 'local'.
+Please set the SP1_PROVER environment variable to one of the supported values.
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+```
+
 ### Generate a Core Proof
 
 To generate a core proof for your program:
@@ -40,6 +59,21 @@ To generate a core proof for your program:
 ```sh
 cd script
 cargo run --release -- --prove
+```
+
+```bash
+warning: `/Users/harukikondo/.cargo/config` is deprecated in favor of `config.toml`
+note: if you need to support cargo 1.38 or earlier, you can symlink `config` to `config.toml`
+warning: `/Users/harukikondo/.cargo/config` is deprecated in favor of `config.toml`
+note: if you need to support cargo 1.38 or earlier, you can symlink `config` to `config.toml`
+warning: fibonacci-script@0.1.0: rustc +succinct --version: "rustc 1.85.0-dev\n"
+warning: fibonacci-script@0.1.0: fibonacci-program built at 2025-03-20 00:12:21
+    Finished `release` profile [optimized] target(s) in 0.36s
+     Running `/Users/harukikondo/git/sp1-project-template/target/release/fibonacci --prove`
+thread 'main' panicked at /Users/harukikondo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sp1-sdk-4.0.0/src/env/mod.rs:67:18:
+Invalid SP1_PROVER value. Expected one of: mock, cpu, cuda, or network. Got: 'local'.
+Please set the SP1_PROVER environment variable to one of the supported values.
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
 ### Generate an EVM-Compatible Proof
